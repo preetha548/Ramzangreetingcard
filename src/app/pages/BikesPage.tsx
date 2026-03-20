@@ -1,48 +1,50 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router';
-import { Search, Star, Filter } from 'lucide-react';
-import { destinations } from '../data/destinations';
+import { Search, Star, Filter, Bike as BikeIcon } from 'lucide-react';
+import { bikes } from '../data/bikes';
 import { Card, CardContent } from '../components/ui/card';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
 import { motion } from 'motion/react';
 
-export function DestinationsPage() {
+export function BikesPage() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [selectedContinent, setSelectedContinent] = useState<string>('all');
+  const [selectedType, setSelectedType] = useState<string>('all');
+  const [selectedAvailability, setSelectedAvailability] = useState<string>('all');
 
-  const categories = ['all', 'beach', 'city', 'adventure', 'culture', 'nature'];
-  const continents = ['all', ...Array.from(new Set(destinations.map(d => d.continent)))];
+  const types = ['all', 'mountain', 'road', 'electric', 'city', 'hybrid', 'bmx'];
 
-  const filteredDestinations = useMemo(() => {
-    return destinations.filter((dest) => {
+  const filteredBikes = useMemo(() => {
+    return bikes.filter((bike) => {
       const matchesSearch =
-        dest.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        dest.country.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        dest.description.toLowerCase().includes(searchQuery.toLowerCase());
+        bike.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        bike.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        bike.description.toLowerCase().includes(searchQuery.toLowerCase());
       
-      const matchesCategory = selectedCategory === 'all' || dest.category === selectedCategory;
-      const matchesContinent = selectedContinent === 'all' || dest.continent === selectedContinent;
+      const matchesType = selectedType === 'all' || bike.type === selectedType;
+      const matchesAvailability = 
+        selectedAvailability === 'all' || 
+        (selectedAvailability === 'available' && bike.available) ||
+        (selectedAvailability === 'rented' && !bike.available);
 
-      return matchesSearch && matchesCategory && matchesContinent;
+      return matchesSearch && matchesType && matchesAvailability;
     });
-  }, [searchQuery, selectedCategory, selectedContinent]);
+  }, [searchQuery, selectedType, selectedAvailability]);
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-16">
+      <div className="bg-gradient-to-r from-green-600 to-emerald-500 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Discover Destinations</h1>
-            <p className="text-xl text-blue-100">
-              Find your perfect travel destination from our curated collection
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Browse Bikes</h1>
+            <p className="text-xl text-green-100">
+              Find the perfect bike for your next adventure
             </p>
           </motion.div>
         </div>
@@ -56,7 +58,7 @@ export function DestinationsPage() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-5 text-gray-400" />
             <Input
               type="text"
-              placeholder="Search destinations..."
+              placeholder="Search bikes by name or brand..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10 py-6 text-lg"
@@ -67,32 +69,32 @@ export function DestinationsPage() {
           <div className="flex flex-wrap gap-4">
             <div className="flex items-center gap-2 flex-wrap">
               <Filter className="size-5 text-gray-600" />
-              <span className="text-sm font-medium text-gray-700">Category:</span>
-              {categories.map((category) => (
+              <span className="text-sm font-medium text-gray-700">Type:</span>
+              {types.map((type) => (
                 <Button
-                  key={category}
-                  variant={selectedCategory === category ? 'default' : 'outline'}
+                  key={type}
+                  variant={selectedType === type ? 'default' : 'outline'}
                   size="sm"
-                  onClick={() => setSelectedCategory(category)}
+                  onClick={() => setSelectedType(type)}
                   className="capitalize"
                 >
-                  {category}
+                  {type}
                 </Button>
               ))}
             </div>
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-sm font-medium text-gray-700">Continent:</span>
-            {continents.map((continent) => (
+            <span className="text-sm font-medium text-gray-700">Availability:</span>
+            {['all', 'available', 'rented'].map((availability) => (
               <Button
-                key={continent}
-                variant={selectedContinent === continent ? 'default' : 'outline'}
+                key={availability}
+                variant={selectedAvailability === availability ? 'default' : 'outline'}
                 size="sm"
-                onClick={() => setSelectedContinent(continent)}
+                onClick={() => setSelectedAvailability(availability)}
                 className="capitalize"
               >
-                {continent}
+                {availability}
               </Button>
             ))}
           </div>
@@ -101,50 +103,55 @@ export function DestinationsPage() {
         {/* Results Count */}
         <div className="mb-6">
           <p className="text-gray-600">
-            Found <span className="font-semibold text-gray-900">{filteredDestinations.length}</span> destination
-            {filteredDestinations.length !== 1 ? 's' : ''}
+            Found <span className="font-semibold text-gray-900">{filteredBikes.length}</span> bike
+            {filteredBikes.length !== 1 ? 's' : ''}
           </p>
         </div>
 
-        {/* Destinations Grid */}
+        {/* Bikes Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredDestinations.map((destination, index) => (
+          {filteredBikes.map((bike, index) => (
             <motion.div
-              key={destination.id}
+              key={bike.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
             >
-              <Link to={`/destinations/${destination.id}`}>
+              <Link to={`/bikes/${bike.id}`}>
                 <Card className="overflow-hidden hover:shadow-xl transition-shadow cursor-pointer group h-full">
                   <div className="relative h-64 overflow-hidden">
                     <img
-                      src={destination.image}
-                      alt={destination.name}
+                      src={bike.image}
+                      alt={bike.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                     <div className="absolute top-4 left-4">
                       <Badge className="bg-white text-gray-900 capitalize">
-                        {destination.category}
+                        {bike.type}
                       </Badge>
                     </div>
-                    <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full font-semibold">
-                      ${destination.price}
+                    <div className="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full font-semibold">
+                      ${bike.pricePerDay}/day
+                    </div>
+                    <div className="absolute bottom-4 right-4">
+                      <Badge className={bike.available ? 'bg-green-500' : 'bg-red-500'}>
+                        {bike.available ? 'Available' : 'Rented'}
+                      </Badge>
                     </div>
                   </div>
                   <CardContent className="p-5">
-                    <h3 className="font-bold text-xl mb-1">{destination.name}</h3>
-                    <p className="text-gray-600 mb-3">{destination.country}</p>
+                    <h3 className="font-bold text-xl mb-1">{bike.name}</h3>
+                    <p className="text-gray-600 mb-3">{bike.brand}</p>
                     <p className="text-gray-700 text-sm mb-4 line-clamp-2">
-                      {destination.description}
+                      {bike.description}
                     </p>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1">
                         <Star className="size-4 fill-yellow-400 text-yellow-400" />
-                        <span className="font-medium">{destination.rating}</span>
-                        <span className="text-sm text-gray-500">({destination.reviews})</span>
+                        <span className="font-medium">{bike.rating}</span>
+                        <span className="text-sm text-gray-500">({bike.reviews})</span>
                       </div>
-                      <span className="text-sm text-gray-600 font-medium">{destination.duration}</span>
+                      <span className="text-sm text-gray-600 font-medium">${bike.pricePerWeek}/week</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -154,14 +161,15 @@ export function DestinationsPage() {
         </div>
 
         {/* No Results */}
-        {filteredDestinations.length === 0 && (
+        {filteredBikes.length === 0 && (
           <div className="text-center py-16">
-            <p className="text-xl text-gray-600 mb-4">No destinations found</p>
+            <BikeIcon className="size-24 text-gray-400 mx-auto mb-4" />
+            <p className="text-xl text-gray-600 mb-4">No bikes found</p>
             <Button
               onClick={() => {
                 setSearchQuery('');
-                setSelectedCategory('all');
-                setSelectedContinent('all');
+                setSelectedType('all');
+                setSelectedAvailability('all');
               }}
             >
               Clear Filters
