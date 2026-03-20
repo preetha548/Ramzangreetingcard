@@ -1,0 +1,138 @@
+export interface Destination {
+  id: string;
+  name: string;
+  country: string;
+  continent: string;
+  description: string;
+  image: string;
+  price: number;
+  duration: string;
+  rating: number;
+  reviews: number;
+  highlights: string[];
+  bestTimeToVisit: string;
+  category: 'beach' | 'city' | 'adventure' | 'culture' | 'nature';
+}
+
+export const destinations: Destination[] = [
+  {
+    id: '1',
+    name: 'Maldives',
+    country: 'Maldives',
+    continent: 'Asia',
+    description: 'Pristine white sand beaches, crystal-clear turquoise waters, and luxurious overwater bungalows await you in this tropical paradise. Perfect for honeymooners and beach lovers.',
+    image: 'https://images.unsplash.com/photo-1714412192114-61dca8f15f68?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0cm9waWNhbCUyMGJlYWNoJTIwcGFyYWRpc2V8ZW58MXx8fHwxNzczOTcyMDM5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    price: 2499,
+    duration: '7 days',
+    rating: 4.9,
+    reviews: 1284,
+    highlights: ['Overwater Villas', 'Diving & Snorkeling', 'Spa Treatments', 'Water Sports'],
+    bestTimeToVisit: 'November to April',
+    category: 'beach',
+  },
+  {
+    id: '2',
+    name: 'Paris',
+    country: 'France',
+    continent: 'Europe',
+    description: 'The City of Light offers romance, world-class museums, stunning architecture, and exquisite cuisine. From the Eiffel Tower to charming cafés, Paris never disappoints.',
+    image: 'https://images.unsplash.com/photo-1725806760874-96040618865c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxldXJvcGVhbiUyMGNpdHklMjBhcmNoaXRlY3R1cmV8ZW58MXx8fHwxNzczOTM4NzQzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    price: 1899,
+    duration: '6 days',
+    rating: 4.8,
+    reviews: 2156,
+    highlights: ['Eiffel Tower', 'Louvre Museum', 'Seine River Cruise', 'French Cuisine'],
+    bestTimeToVisit: 'April to June, September to November',
+    category: 'city',
+  },
+  {
+    id: '3',
+    name: 'Swiss Alps',
+    country: 'Switzerland',
+    continent: 'Europe',
+    description: 'Breathtaking mountain landscapes perfect for skiing, hiking, and adventure sports. Experience charming alpine villages and stunning panoramic views.',
+    image: 'https://images.unsplash.com/photo-1673505413397-0cd0dc4f5854?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb3VudGFpbiUyMGxhbmRzY2FwZSUyMGFkdmVudHVyZXxlbnwxfHx8fDE3NzM5MjQ4NjB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    price: 2199,
+    duration: '8 days',
+    rating: 4.9,
+    reviews: 987,
+    highlights: ['Skiing & Snowboarding', 'Mountain Hiking', 'Scenic Train Rides', 'Alpine Villages'],
+    bestTimeToVisit: 'December to March, June to September',
+    category: 'adventure',
+  },
+  {
+    id: '4',
+    name: 'Kyoto',
+    country: 'Japan',
+    continent: 'Asia',
+    description: 'Ancient temples, traditional geisha districts, zen gardens, and cherry blossoms. Immerse yourself in Japanese culture and history in this beautiful city.',
+    image: 'https://images.unsplash.com/photo-1769223147961-e31437e6ff22?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhc2lhbiUyMHRlbXBsZSUyMGN1bHR1cmV8ZW58MXx8fHwxNzczOTY5NzA5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    price: 1699,
+    duration: '7 days',
+    rating: 4.8,
+    reviews: 1432,
+    highlights: ['Ancient Temples', 'Geisha District', 'Tea Ceremonies', 'Cherry Blossoms'],
+    bestTimeToVisit: 'March to May, September to November',
+    category: 'culture',
+  },
+  {
+    id: '5',
+    name: 'Dubai Desert',
+    country: 'UAE',
+    continent: 'Asia',
+    description: 'Experience the magic of the Arabian desert with thrilling dune bashing, camel rides, and luxury desert camps under the stars.',
+    image: 'https://images.unsplash.com/photo-1554369369-2efa1c2be9d6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZXNlcnQlMjBzYWZhcmklMjBhZHZlbnR1cmV8ZW58MXx8fHwxNzczOTE0MDg5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    price: 1299,
+    duration: '5 days',
+    rating: 4.7,
+    reviews: 843,
+    highlights: ['Dune Bashing', 'Camel Riding', 'Desert Camping', 'Traditional Dinner'],
+    bestTimeToVisit: 'November to March',
+    category: 'adventure',
+  },
+  {
+    id: '6',
+    name: 'Iceland',
+    country: 'Iceland',
+    continent: 'Europe',
+    description: 'Witness the spectacular Northern Lights, explore dramatic waterfalls, geothermal hot springs, and volcanic landscapes in this land of fire and ice.',
+    image: 'https://images.unsplash.com/photo-1648607560570-4ee80c5914c1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxub3J0aGVybiUyMGxpZ2h0cyUyMGF1cm9yYXxlbnwxfHx8fDE3NzM5ODk0OTZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    price: 2399,
+    duration: '7 days',
+    rating: 4.9,
+    reviews: 1567,
+    highlights: ['Northern Lights', 'Blue Lagoon', 'Golden Circle', 'Ice Caves'],
+    bestTimeToVisit: 'September to March',
+    category: 'nature',
+  },
+  {
+    id: '7',
+    name: 'Caribbean Islands',
+    country: 'Various',
+    continent: 'North America',
+    description: 'Paradise islands with stunning beaches, vibrant coral reefs, and laid-back island vibes. Perfect for relaxation and water activities.',
+    image: 'https://images.unsplash.com/photo-1542356670-0366c7cd7ebc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYXJpYmJlYW4lMjBpc2xhbmQlMjBhZXJpYWx8ZW58MXx8fHwxNzczOTg5NDk2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    price: 1799,
+    duration: '6 days',
+    rating: 4.7,
+    reviews: 1092,
+    highlights: ['White Sand Beaches', 'Snorkeling', 'Island Hopping', 'Local Cuisine'],
+    bestTimeToVisit: 'December to April',
+    category: 'beach',
+  },
+  {
+    id: '8',
+    name: 'African Safari',
+    country: 'Kenya',
+    continent: 'Africa',
+    description: 'Embark on an unforgettable wildlife adventure. See lions, elephants, zebras, and more in their natural habitat across stunning savannas.',
+    image: 'https://images.unsplash.com/photo-1729359035276-189519a4b072?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhZnJpY2ElMjB3aWxkbGlmZSUyMHNhZmFyaXxlbnwxfHx8fDE3NzM5ODk0OTZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    price: 2899,
+    duration: '9 days',
+    rating: 5.0,
+    reviews: 876,
+    highlights: ['Wildlife Safari', 'Big Five', 'Masai Mara', 'Luxury Lodges'],
+    bestTimeToVisit: 'July to October',
+    category: 'adventure',
+  },
+];

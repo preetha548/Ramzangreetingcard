@@ -1,9 +1,12 @@
-import { RamadanCard } from './components/RamadanCard';
+import { RouterProvider } from 'react-router';
+import { router } from './routes';
+import { Toaster } from './components/ui/sonner';
 
 export default function App() {
   return (
-    <div className="size-full flex items-center justify-center">
-      <RamadanCard />
-    </div>
+    <>
+      <RouterProvider router={router} />
+      <Toaster />
+    </>
   );
 }
